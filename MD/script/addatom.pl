@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+open INA,"$ARGV[0]" or die "cannot open lig.gro:$!";
+open INB,"$ARGV[1]" or die "cannot open rec_processed.gro:$!";
+open OUT,'>complex.gro' or die "$!";
+@ligand=<INA>;
+@protein=<INB>;
+@religand=@ligand;
+shift @ligand;
+$a=shift @ligand;
+chomp $a;
+pop(@ligand);
+$b=pop(@protein);
+push(@protein,@ligand);
+$protein[1]=$protein[1]+$a;
+$protein[1]="$protein[1]\n";
+push(@protein,$b);
+print OUT @protein;
+@ligand=@religand;
+close INA;
+close INB;
+close OUT;
