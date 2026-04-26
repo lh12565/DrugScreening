@@ -20,6 +20,7 @@ grep UNL pro_lig.pdb >lig.pdb
 perl ../script/sort_mol2_bonds.pl lig.mol2 lig_fix.mol2
 #去CGenFF（https://cgenff.com/）生成str
 
+##注意这里的警告中的版本与自己的版本需要尽量一致
 source activate gromacs
 python ../script/cgenff_charmm2gmx_py3_nx2.py lig lig_fix.mol2 lig_fix.str ../charmm36-jul2022.ff
 conda deactivate
@@ -41,6 +42,7 @@ perl ../script/addatom.pl lig.gro rec_processed.gro
 #修改topol文件(已经修改)[注意：把lig信息加进去]
 
 
+#盒子和水模型
 gmx_mpi editconf -f complex.gro -o newbox.gro -bt dodecahedron -d 1.0
 gmx_mpi solvate -cp newbox.gro -cs spc216.gro -p topol.top -o solv.gro
 
@@ -51,7 +53,7 @@ gmx_mpi grompp -f ../mdp/ions.mdp -c solv.gro -p topol.top -o ions.tpr
 gmx_mpi genion -s ions.tpr -o solv_ions.gro -p topol.top -pname SOD -nname CLA -neutral  #2022版charmm的ions.itp：NA为SOD  CL为CLA
 ###选15 SOL 来替换NACL
 
-##能量最小化配置（需要em.mdp）
+##能量最小化（需要em.mdp）
 gmx_mpi grompp -f ../mdp/em.mdp -c solv_ions.gro -p topol.top -o em.tpr
 gmx_mpi mdrun -v -deffnm em
 
@@ -86,7 +88,7 @@ gmx_mpi mdrun -v -deffnm npt
 
 
 gmx_mpi grompp -f ../mdp/md.mdp -c npt.gro -t npt.cpt -p topol.top -n index.ndx -o md_0_10.tpr
-gmx_mpi mdrun -v -deffnm md_0_10  #6h
+gmx_mpi mdrun -v -deffnm md_0_10  # 100ns 根据mdp文件修改
 #gmx_mpi mdrun -v -deffnm md_0_10  -gpu_id 1
 
 
