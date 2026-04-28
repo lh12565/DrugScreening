@@ -18,3 +18,18 @@ DrugScreen/
 │ ├── script/ # In-house scripts for modifying MD files and processing small molecules
 │ └── MD.sh # Main script to run the entire MD pipeline
 ```
+
+## Requirements
+
+### AutoDock Vina
+- [AutoDock Vina](https://github.com/ccsb-scripps/AutoDock-Vina)
+- [Meeko](https://github.com/forlilab/Meeko)  (for preparing ligand PDBQT files)
+- [MGLTools](https://ccsb.scripps.edu/mgltools/) (for preparing receptor PDBQT files)
+- [RDKit](https://github.com/rdkit/rdkit) (commercial) 或 [Schrödinger](https://www.schrodinger.com/release-download/) (free)
+
+### Molecular Dynamics
+- [GROMACS](https://manual.gromacs.org/current/download.html) (2022 or later)
+- [gmx_MMPBSA](https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/installation/)
+- [Avogadro](https://avogadro.cc/install/index.html)
+
+
