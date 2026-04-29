@@ -25,7 +25,7 @@ DrugScreen/
 - [AutoDock Vina](https://github.com/ccsb-scripps/AutoDock-Vina)
 - [Meeko](https://github.com/forlilab/Meeko)  (for preparing ligand PDBQT files)
 - [MGLTools](https://ccsb.scripps.edu/mgltools/) (for preparing receptor PDBQT files)
-- [RDKit](https://github.com/rdkit/rdkit) (commercial) 或 [Schrödinger](https://www.schrodinger.com/release-download/) (free)
+- [RDKit](https://github.com/rdkit/rdkit) (free) 或 [Schrödinger](https://www.schrodinger.com/release-download/) (commercial)
 
 ### Molecular Dynamics
 - [GROMACS](https://manual.gromacs.org/current/download.html) (2022 or later)
