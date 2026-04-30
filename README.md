@@ -22,14 +22,14 @@ DrugScreen/
 ## Requirements
 
 ### AutoDock Vina
-- [AutoDock Vina](https://github.com/ccsb-scripps/AutoDock-Vina)
-- [Meeko](https://github.com/forlilab/Meeko)  (for preparing ligand PDBQT files)
-- [MGLTools](https://ccsb.scripps.edu/mgltools/) (for preparing receptor PDBQT files)
+- [AutoDock Vina](https://github.com/ccsb-scripps/AutoDock-Vina)   (v1.2.5)
+- [Meeko](https://github.com/forlilab/Meeko)  (for preparing ligand PDBQT files)  (v0.4.0)
+- [MGLTools/AutoDockTools](https://ccsb.scripps.edu/mgltools/) (for preparing receptor PDBQT files)  (v1.5.7)
 - [RDKit](https://github.com/rdkit/rdkit) (free) 或 [Schrödinger](https://www.schrodinger.com/release-download/) (commercial)
 
 ### Molecular Dynamics
-- [GROMACS](https://manual.gromacs.org/current/download.html) (2022 or later)
-- [gmx_MMPBSA](https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/installation/)
-- [Avogadro](https://avogadro.cc/install/index.html)
+- [GROMACS](https://manual.gromacs.org/current/download.html) (v2022.3 or later)
+- [gmx_MMPBSA](https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/installation/)  (v1.5.7 based on MMPBSA version 16.0 and AmberTools 20)
+- [Avogadro](https://avogadro.cc/install/index.html)  (v1.2.0)
 
 
