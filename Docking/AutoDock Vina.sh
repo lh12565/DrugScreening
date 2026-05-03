@@ -1,18 +1,18 @@
-#本教程通过AutoDock Vina对接
+# This tutorial uses AutoDock Vina for docking
 
-#安装软件
+# Install the software
 https://github.com/ccsb-scripps/AutoDock-Vina
 https://github.com/forlilab/Meeko
 https://ccsb.scripps.edu/mgltools/
-https://www.schrodinger.com/release-download/  (收费) 或者 https://github.com/rdkit/rdkit  (免费)
+https://www.schrodinger.com/release-download/  (commercial) or https://github.com/rdkit/rdkit  (free)
 
 
-#受体准备方法（移除非必须分子，如水分子；加H，电荷）：
-AutoDock Tools准备（可参考：https://vina.scripps.edu/tutorial/或https://2024.igem.wiki/nyu-new-york/contribution）
-盒子参数格式样例(configure.txt)：
+# Receptor preparation (remove non-essential molecules, e.g., water; add hydrogen atoms and charges):
+## AutoDock Tools preparation（refer to: https://vina.scripps.edu/tutorial/ or https://2024.igem.wiki/nyu-new-york/contribution）
+Example of box parameter format (configure.txt)：
 ###################################
-receptor = receptor.pdbqt  #可选
-ligand = ligand.pdbqt  #可选
+receptor = receptor.pdbqt  # Optional
+ligand = ligand.pdbqt  # Optional
 
 center_x = -1.0
 center_y = 5.151
@@ -21,9 +21,9 @@ size_x = 20.0
 size_y = 18.0
 size_z = 28.0
 
-energy_range = 4  #可选
-exhaustiveness = 12  #可选
-num_modes = 9  #可选
+energy_range = 4  # Optional
+exhaustiveness = 12  # Optional
+num_modes = 9  # Optional
 ###################################
 
 
