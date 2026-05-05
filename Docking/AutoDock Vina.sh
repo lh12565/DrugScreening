@@ -27,37 +27,37 @@ num_modes = 9  # Optional
 ###################################
 
 
-#配体准备（加H，电荷，质子化）
-##1)如果是一个小分子或少量小分子，直接用AutoDock Tools处理（参见以上链接）
-##2)如果是虚拟筛选多个小分子，可用LigPrep或RDKit处理：
+# Ligand preparation (adding hydrogen atoms, charges, and protonation)
+## 1)For a single small molecule or a few small molecules, process directly with AutoDock Tools (see above links)
+## 2)For virtual screening of multiple small molecules, LigPrep or RDKit can be used for processing:
 ###LigPrep
-LigPrep(Schrodinger工具:一般保持默认参数)处理所有分子(都在一个文件中)；保存为sdf文件
+LigPrep (Schrodinger tool: generally keep default parameters) processes all molecules (all in one file); save as an sdf file.
 ###RDKit
 #################################################
 from rdkit import Chem
 from rdkit.Chem import rdDistGeom
 from rdkit.Chem import rdForceFieldHelpers
 
-mol = Chem.MolFromMol2File("molecule.mol2")  #mol2格式
+mol = Chem.MolFromMol2File("molecule.mol2")  # mol2 format
 mol_h = Chem.AddHs(mol)
-etkdgv3 = rdDistGeom.ETKDGv3()  #3D构象
+etkdgv3 = rdDistGeom.ETKDGv3()  # 3D structure
 rdDistGeom.EmbedMolecule(mol_h, etkdgv3)
 rdForceFieldHelpers.UFFOptimizeMolecule(mol_h)
 print(Chem.MolToMolBlock(mol_h), end='')
 
-#或者
+# Or
 from rdkit import Chem
 from rdkit.Chem import AllChem
-smiles = "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O"  #示例
+smiles = "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O"  # Example
 mol = Chem.MolFromSmiles(smiles)
 mol = Chem.AddHs(mol)
-AllChem.EmbedMolecule(mol, randomSeed=42)   #注：AllChem.EmbedMultipleConfs(mol, numConfs=10, randomSeed=42)可以生成多个构象
-AllChem.MMFFOptimizeMolecule(mol)  #用MMFF力场优化几何结构
+AllChem.EmbedMolecule(mol, randomSeed=42)   # Note: AllChem.EmbedMultipleConfs(mol, numConfs=10, randomSeed=42) can be used to generate multiple conformations
+AllChem.MMFFOptimizeMolecule(mol)  # Optimize the geometry using the MMFF force field
 
-#多个分子保存
+# Save multiple molecules
 from rdkit import Chem
 from rdkit.Chem import AllChem
-supplier = Chem.SDMolSupplier("ligands_2d.sdf", removeHs=False)  #sdf格式
+supplier = Chem.SDMolSupplier("ligands_2d.sdf", removeHs=False)  # sdf format
 writer = Chem.SDWriter("ligands_3d_confs.sdf")
 for mol in supplier:
     if mol is None:
@@ -69,11 +69,11 @@ for mol in supplier:
 writer.close()
 #################################################
 
-##处理后利用meeko转为pdbqt（注意：Meeko的输入：The input needs to be 3D and protonated, and SD files are preferred to MOL2）：
+## After processing, use Meeko to convert to pdbqt (Note: The input needs to be 3D and protonated, and SD files are preferred to MOL2):
 mk_prepare_ligand.py -i ligprep-out.sdf --multimol_prefix lig --multimol_outdir pdbqt
 
-##将id（上面的pdbqt文件夹中输出的每个小分子id）和药物对应起来：
-###注我的文件里面有<IDNUMBER>， <NAME>等内容，下面代码根据你的内容修改
+## Map the IDs (each small molecule ID output in the pdbqt folder above) to the corresponding drugs:
+### Note: My file contains <IDNUMBER>, <NAME>, etc. Modify the code below according to your own file.
 ############################################################
 #! /usr/bin/perl -w
 open INA,"$ARGV[0]" or die "cannot open ligprep-out.sdf:$!";
