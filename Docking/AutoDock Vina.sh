@@ -4,7 +4,7 @@
 https://github.com/ccsb-scripps/AutoDock-Vina
 https://github.com/forlilab/Meeko
 https://ccsb.scripps.edu/mgltools/
-https://www.schrodinger.com/release-download/  (commercial) or https://github.com/rdkit/rdkit  (free)
+https://www.schrodinger.com/release-download/ (commercial) or https://github.com/rdkit/rdkit (free)
 
 
 # Receptor preparation (remove non-essential molecules, e.g., water; add hydrogen atoms and charges):
@@ -108,8 +108,8 @@ close OUT;
 
 
 
-#虚拟筛选
-##$prov为小分子id（比如ligprep-out-1，ligprep-out-2）
+# Virtual screening
+##$prov为小分子id（e.g. ligprep-out-1，ligprep-out-2）
 for db in $prov
 do
 {
@@ -117,7 +117,7 @@ do
 }&
 done
 
-#提前ID和分数（perl）:
+# Extract IDs and scores (Perl):
 #####################################################
 #!/usr/bin/perl
 opendir DIR,"$ARGV[0]" or die "cannot open dir:$!";
@@ -138,11 +138,11 @@ foreach $file(sort readdir DIR){
 	}
 }
 
-##输出后需要结合上面的vina_id.txt文件来看对应药物
+## After output, combine with the vina_id.txt file above to identify the corresponding drugs.
 #####################################################
 
 
-#感兴趣小分子利用Meeko工具将pdbqt转为sdf，方便后续可视化
+#Convert pdbqt to sdf using the Meeko tool for small molecules of interest to facilitate downstream visualization.
 source activate meeko
 cd vina_out_interested_ligand
 for i in $(ls)
