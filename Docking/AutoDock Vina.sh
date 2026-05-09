@@ -8,7 +8,7 @@ https://www.schrodinger.com/release-download/ (commercial) or https://github.com
 
 
 # Receptor preparation (remove non-essential molecules, e.g., water; add hydrogen atoms and charges):
-## AutoDock Tools preparation（refer to: https://vina.scripps.edu/tutorial/ or https://2024.igem.wiki/nyu-new-york/contribution）
+## AutoDock Tools preparation (refer to: https://vina.scripps.edu/tutorial/ or https://2024.igem.wiki/nyu-new-york/contribution)
 Example of box parameter format (configure.txt)：
 ###################################
 receptor = receptor.pdbqt  # Optional
@@ -109,7 +109,7 @@ close OUT;
 
 
 # Virtual screening
-##$prov为小分子id（e.g. ligprep-out-1，ligprep-out-2）
+## $prov is the small molecule ID (e.g. ligprep-out-1，ligprep-out-2)
 for db in $prov
 do
 {
