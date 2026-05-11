@@ -27,33 +27,33 @@ conda deactivate
 
 
 gmx_mpi editconf -f lig_ini.pdb -o lig.gro
-#md运行前，常常需要修改gro、top等文件，比如添加配体信息，添加体系限制等，用我的脚本添加更方便：
-#先备份一份原始文件，以便之后处理错误后，再复制这个原始文件
+# Before MD: modify .gro/.top files (e.g., add ligand info, system restraints). Using a script is easier.
+# Backup the original file first, so you can restore it if errors occur.
 #mkdir ori
 #cp rec_processed.gro ori/
 #cp posre.itp ori/
 #topol.top ori/
 
-#修改complex.gro:
+# Modify complex.gro:
 perl ../script/addatom.pl lig.gro rec_processed.gro
 
 
 #cp ../topol.top .
-#修改topol文件(已经修改)[注意：把lig信息加进去]
+# Modify the topol file (already modified) [Note: Add the ligand information]
 
 
-#盒子和水模型
+# Box and water model
 gmx_mpi editconf -f complex.gro -o newbox.gro -bt dodecahedron -d 1.0
 gmx_mpi solvate -cp newbox.gro -cs spc216.gro -p topol.top -o solv.gro
 
 
-##能量最小化配置（需要ion.mdp）
+## Energy minimization configuration (requires ion.mdp)
 gmx_mpi grompp -f ../mdp/ions.mdp -c solv.gro -p topol.top -o ions.tpr
-##加NACL
+## add NACL
 gmx_mpi genion -s ions.tpr -o solv_ions.gro -p topol.top -pname SOD -nname CLA -neutral  #2022版charmm的ions.itp：NA为SOD  CL为CLA
-###选15 SOL 来替换NACL
+### Select 15 (SOL) to replace NaCl
 
-##能量最小化（需要em.mdp）
+## Energy minimization (requires em.mdp)
 gmx_mpi grompp -f ../mdp/em.mdp -c solv_ions.gro -p topol.top -o em.tpr
 gmx_mpi mdrun -v -deffnm em
 
