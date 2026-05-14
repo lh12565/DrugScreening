@@ -57,18 +57,18 @@ gmx_mpi genion -s ions.tpr -o solv_ions.gro -p topol.top -pname SOD -nname CLA -
 gmx_mpi grompp -f ../mdp/em.mdp -c solv_ions.gro -p topol.top -o em.tpr
 gmx_mpi mdrun -v -deffnm em
 
-##1. 对配体施加约束2. 温度耦合组的处理
-###生成一个配体位置约束拓扑
-####首先为配体创建一个只包含非氢原子的索引组
+##1. Apply constraints to the ligand 2. Handling of temperature coupling groups
+### Generate a ligand position restraint topology
+#### First, create an index group for the ligand that contains only non-hydrogen atoms
 gmx_mpi make_ndx -f lig.gro -o index_lig.ndx
  > 0 & ! a H*
  > q
-###用genrestr选择上面的非氢配体组
+### Use genrestr to select the above non-hydrogen ligand group
 gmx_mpi genrestr -f lig.gro -n index_lig.ndx -o posre_lig.itp -fc 1000 1000 1000
-####选3
+#### select 3
 
-###加入约束信息到topol.top
-####对于不同的约束加入不同的约束条件:
+### Add the restraint information to topol.top.
+#### Add different restraint conditions for different restraints:
 perl ../script/addmode2.pl topol.top
 
 ##如果对每个分子类型进行温度耦合（即tc-grps = Protein lig SOL CL），会造成崩溃（耦合算法的不稳定性，如配体和CL）
