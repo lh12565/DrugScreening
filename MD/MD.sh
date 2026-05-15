@@ -71,24 +71,24 @@ gmx_mpi genrestr -f lig.gro -n index_lig.ndx -o posre_lig.itp -fc 1000 1000 1000
 #### Add different restraint conditions for different restraints:
 perl ../script/addmode2.pl topol.top
 
-##如果对每个分子类型进行温度耦合（即tc-grps = Protein lig SOL CL），会造成崩溃（耦合算法的不稳定性，如配体和CL）
-##可以设置为tc-grps = Protein Non-Protein，但是蛋白和配体互作性高，可以看成整体
-###合并蛋白和配体
+## If temperature coupling is performed for each molecular type (i.e., tc-grps = Protein lig SOL CL), it may lead to collapse (instability of the coupling algorithm, e.g., for ligands and CL).
+## It can be set as tc-grps = Protein Non-Protein, but since the protein and ligand interact strongly, they can be treated as a single entity.
+### Merge the protein and ligand.
 gmx_mpi make_ndx -f em.gro -o index.ndx
 > 1 | 13
-> 15 | 14   #根据自己的参数来
+> 15 | 14   # Choose the parameters based on your own .ndx
 > q
-##现在可以将tc-grps = Protein_lig Water_and_ions看做为Protein Non-Protein
-###执行NVT（需要nvt.mdp）
+## Now tc-grps = Protein_lig Water_and_ions can be regarded as Protein Non-Protein
+### Run NVT (requires nvt.mdp)
 gmx_mpi grompp -f ../mdp/nvt.mdp -c em.gro -r em.gro -p topol.top -n index.ndx -o nvt.tpr
 gmx_mpi mdrun -v -deffnm nvt
-###执行NPT（需要npt.mdp）
+### Run NVT (requires npt.mdp)
 gmx_mpi grompp -f ../mdp/npt.mdp -c nvt.gro -t nvt.cpt -r nvt.gro -p topol.top -n index.ndx -o npt.tpr
 gmx_mpi mdrun -v -deffnm npt
 
 
 gmx_mpi grompp -f ../mdp/md.mdp -c npt.gro -t npt.cpt -p topol.top -n index.ndx -o md_0_10.tpr
-gmx_mpi mdrun -v -deffnm md_0_10  # 100ns 根据mdp文件修改
+gmx_mpi mdrun -v -deffnm md_0_10  # The simulation time (ns) can be modified in the md.mdp file.
 #gmx_mpi mdrun -v -deffnm md_0_10  -gpu_id 1
 
 
