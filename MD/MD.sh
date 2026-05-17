@@ -50,7 +50,7 @@ gmx_mpi solvate -cp newbox.gro -cs spc216.gro -p topol.top -o solv.gro
 ## Energy minimization configuration (requires ion.mdp)
 gmx_mpi grompp -f ../mdp/ions.mdp -c solv.gro -p topol.top -o ions.tpr
 ## add NACL
-gmx_mpi genion -s ions.tpr -o solv_ions.gro -p topol.top -pname SOD -nname CLA -neutral  #2022版charmm的ions.itp：NA为SOD  CL为CLA
+gmx_mpi genion -s ions.tpr -o solv_ions.gro -p topol.top -pname SOD -nname CLA -neutral  # ions.itp for the 2022 version of CHARMM: NA为SOD  CL为CLA
 ### Select 15 (SOL) to replace NaCl
 
 ## Energy minimization (requires em.mdp)
@@ -101,7 +101,7 @@ gmx_mpi make_ndx -f em.gro -n index.ndx <<EOF
 name 20 lig_Heavy
 q
 EOF
-###选择backbone和20
+### Select backbone and 20
 echo 4 20 | gmx_mpi rms -s em.tpr -f md_0_10_center.xtc -n index.ndx -tu ns -o rmsd_lig.xvg
 
 
@@ -109,7 +109,7 @@ echo 4 20 | gmx_mpi rms -s em.tpr -f md_0_10_center.xtc -n index.ndx -tu ns -o r
 #gmx_MMPBSA -O -i mmpbsa_charm.in -cs md_0_10.tpr -ci index.ndx -cg 1 13 -ct md_0_10_center.xtc
 source activate gmxMMPBSA
 
-#修改平衡的frame，比如75-100在mmpbsa_charm.in里面改,更多参数修改，请参考gmxMMPBSA手册：https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/input_file/
+# Modify the frames used for equilibration, for example, frames 75–100 can be adjusted in the mmpbsa_charm.in file. For more parameter modifications, please refer to the gmxMMPBSA manual: https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/input_file/
 cd mmpbsa
 mpirun -np 10 gmx_MMPBSA MPI -O -i mmpbsa_charm.in -cs ../md_0_10.tpr -ci ../index.ndx -cg 1 13 -ct ../md_0_10_center.xtc -cp ../topol.top
 
