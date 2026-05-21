@@ -106,7 +106,7 @@ echo 4 20 | gmx_mpi rms -s em.tpr -f md_0_10_center.xtc -n index.ndx -tu ns -o r
 
 
 #gmx_MMPBSA
-#gmx_MMPBSA -O -i mmpbsa_charm.in -cs md_0_10.tpr -ci index.ndx -cg 1 13 -ct md_0_10_center.xtc
+#gmx_MMPBSA -O -i ../script/mmpbsa_charm.in -cs md_0_10.tpr -ci index.ndx -cg 1 13 -ct md_0_10_center.xtc
 source activate gmxMMPBSA
 
 # Modify the frames used for equilibration, for example, frames 75–100 can be adjusted in the mmpbsa_charm.in file. For more parameter modifications, please refer to the gmxMMPBSA manual: https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/input_file/
