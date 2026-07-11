@@ -105,7 +105,7 @@ EOF
 echo 4 20 | gmx_mpi rms -s em.tpr -f md_0_10_center.xtc -n index.ndx -tu ns -o rmsd_lig.xvg
 
 
-#gmx_MMPBSA
+#gmx_MMPBSA  (Molecular Mechanics Poisson-Boltzmann Surface Area)
 source activate gmxMMPBSA
 
 # Modify the frames used for equilibration, for example, frames 75–100 can be adjusted in the mmpbsa_charm.in file. For more parameter modifications, please refer to the gmxMMPBSA manual: https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/input_file/
