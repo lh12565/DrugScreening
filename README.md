@@ -12,7 +12,7 @@ DrugScreen/
 ├── Docking/
 │ └── AutoDock Vina.sh # Main script for running AutoDock Vina docking
 │
-├── MD/
+├── MD/https://www.bilibili.com/
 │ ├── charmm36-jul2022.ff/ # CHARMM36 force field files (July 2022 release)
 │ ├── mdp/ # GROMACS .mdp parameter files (minimization, equilibration, production)
 │ ├── script/ # In-house scripts for modifying MD files and processing small molecules
@@ -31,5 +31,11 @@ DrugScreen/
 - [GROMACS](https://manual.gromacs.org/current/download.html) (v2022.3 or later)
 - [gmx_MMPBSA](https://valdes-tresanco-ms.github.io/gmx_MMPBSA/dev/installation/)  (v1.5.7 based on MMPBSA version 16.0 and AmberTools 20)
 - [Avogadro](https://avogadro.cc/install/index.html)  (v1.2.0)
+
+
+<p align="center">
+     <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Flh12565%2FDrugScreening&labelColor=%232ccce4&countColor=%2337d67a" />
+</p>
+
 
 
