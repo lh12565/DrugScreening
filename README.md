@@ -12,7 +12,7 @@ DrugScreen/
 ├── Docking/
 │ └── AutoDock Vina.sh # Main script for running AutoDock Vina docking
 │
-├── MD/https://www.bilibili.com/
+├── MD/
 │ ├── charmm36-jul2022.ff/ # CHARMM36 force field files (July 2022 release)
 │ ├── mdp/ # GROMACS .mdp parameter files (minimization, equilibration, production)
 │ ├── script/ # In-house scripts for modifying MD files and processing small molecules
